@@ -6,5 +6,5 @@ Box2D as native Node.js addon
 Install with NPM:
 
 ```
-npm install hiredis
+npm install box2d-native
 ```
