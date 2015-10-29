@@ -1,7 +1,7 @@
 {
   "name": "box2d-native",
-  "version": "0.0.1",
-  "description": "Box2D linked",
+  "version": "0.0.2",
+  "description": "Box2D as native addon",
   "main": "index.js",
   "engines" : {
     "node" : ">=4.2.1"
@@ -35,7 +35,9 @@
     "postinstall": "npm run clean",
     "test": "node node_modules/.bin/mocha -r tests/bootstrap.js tests/**/*.spec.js"
   },
-  "author": "",
+  "contributors": [
+    "Leonid Kuzmin <lndkuzmin@gmail.com> (https://github.com/zuker)"
+  ],
   "license": "MIT",
   "dependencies": {
     "babel": "^5.8.29",
