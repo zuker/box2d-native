@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Box2D linked",
   "main": "index.js",
+  "engines" : {
+    "node" : ">=4.2.1"
+  },
   "config": {
     "box2d_url": "https://codeload.github.com/erincatto/Box2D/tar.gz/v2.3.0",
     "swig_url": "http://prdownloads.sourceforge.net/swig/swig-3.0.7.tar.gz",
