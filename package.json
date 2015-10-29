@@ -24,7 +24,7 @@
     "untar": "npm run untar:Box2D && npm run untar:swig",
     "make:swig": "cd $npm_package_config_swig_dir && \\\n./configure \\\n--without-tcl \\\n--without-python \\\n--without-python3 \\\n--without-perl5 \\\n--without-octave \\\n--without-scilab \\\n--without-java \\\n--without-gcj \\\n--without-android \\\n--without-guile \\\n--without-mzscheme \\\n--without-ruby \\\n--without-php \\\n--without-ocaml \\\n--without-pike \\\n--without-chicken \\\n--without-csharp \\\n--without-lua \\\n--without-allegrocl \\\n--without-clisp \\\n--without-r \\\n--without-go \\\n--without-d &&\\\nmake",
     "patch": "patch $npm_package_config_box2d_cmake_lists_path patch.txt",
-    "make:Box2D": "cd $npm_package_config_box2d_dir && cmake -DBOX2D_BUILD_SHARED=OF -DBOX2D_BUILD_EXAMPLES=OFF -DBOX2D_BUILD_STATIC=ON -DBOX2D_INSTALL=OFF -DBOX2D_INSTALL_DOC=OFF && make",
+    "make:Box2D": "cd $npm_package_config_box2d_dir && cmake -DBOX2D_BUILD_SHARED=OFF -DBOX2D_BUILD_EXAMPLES=OFF -DBOX2D_BUILD_STATIC=ON -DBOX2D_INSTALL=OFF -DBOX2D_INSTALL_DOC=OFF && make",
     "make": "npm run make:swig && npm run make:Box2D",
     "wrap": "cd $npm_package_config_box2d_dir &&  ../../$npm_package_config_swig_dir/swig -c++ -javascript -node -O -ignoremissing -includeall -DV8_VERSION=`node -e \"console.log('0x0' + process.versions.v8.replace(/\\./g, ''))\"` ../../Box2D.i",
     "clean:Box2D": "rm -rf Box2D-2.3.0 && rm -rf $npm_package_config_box2d_arch_name",

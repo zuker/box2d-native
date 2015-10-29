@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/zuker/box2d-native.svg?branch=dev)](https://travis-ci.org/zuker/box2d-native)
 
 # box2d-native
-Box2D as native Node.js addon
+[Box2D](http://box2d.org/) as native Node.js addon
 
 ## Details
 
@@ -28,11 +28,11 @@ let body world.CreateBody(new BodyDef());
 world.Step(1 / 60, 3, 3);
 ```
 
-"Namespaced" Box2D classes (b2Vec2, b2World...) are also exposed.
+"Namespaced" Box2D classes (`b2Vec2`, `b2World`...) are also exposed.
 
 ## Performance
 
 Results from [bench2d](https://github.com/joelgwebber/bench2d) (i7 2.9GHZ, 4GB RAM, Ubuntu 15.04):
  - [box2d.js](https://www.npmjs.com/package/box2d.js): ms/frame: 3.5537109375 5th %ile: 3 95th %ile: 4
 
- - [box2d-native](https://www.npmjs.com/package/box2d-native) ms/frame: 1.689453125 5th %ile: 1 95th %ile: 2
+ - [box2d-native](https://www.npmjs.com/package/box2d-native): ms/frame: 1.689453125 5th %ile: 1 95th %ile: 2
