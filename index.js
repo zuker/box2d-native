@@ -1,5 +1,5 @@
 'use strict';
-require('babel/register')({
+require('babel/register')(Object.assign({
   whitelist: [
     'es6.modules',
     'strict',
@@ -7,6 +7,6 @@ require('babel/register')({
     'es6.spread',
     'es6.destructuring'
   ]
-});
+}, process.env.NODE_ENV === 'DEBUG'? { retainLines: true } : {}));
 
-require('./Box2D');
+module.exports = require('./Box2D');
