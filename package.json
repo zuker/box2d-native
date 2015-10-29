@@ -1,0 +1,31 @@
+{
+  "name": "box2d-native",
+  "version": "0.0.1",
+  "description": "Box2D linked",
+  "main": "index.js",
+  "scripts": {
+    "get:Box2D": "curl -O -J https://codeload.github.com/erincatto/Box2D/tar.gz/v2.3.0",
+    "get:swig": "curl -O -L http://prdownloads.sourceforge.net/swig/swig-3.0.7.tar.gz",
+    "get": "npm run get:Box2D && npm run get:swig",
+    "untar:Box2D": "tar -zxvf Box2D-2.3.0.tar.gz",
+    "untar:swig": "tar -zxvf swig-3.0.7.tar.gz",
+    "untar": "npm run untar:Box2D && npm run untar:swig",
+    "make:swig": "cd swig-3.0.7 && \\\n./configure \\\n--without-tcl \\\n--without-python \\\n--without-python3 \\\n--without-perl5 \\\n--without-octave \\\n--without-scilab \\\n--without-java \\\n--without-gcj \\\n--without-android \\\n--without-guile \\\n--without-mzscheme \\\n--without-ruby \\\n--without-php \\\n--without-ocaml \\\n--without-pike \\\n--without-chicken \\\n--without-csharp \\\n--without-lua \\\n--without-allegrocl \\\n--without-clisp \\\n--without-r \\\n--without-go \\\n--without-d &&\\\nmake",
+    "patch": "patch Box2D-2.3.0/Box2D/Box2D/CMakeLists.txt patch.txt",
+    "make:Box2D": "cd Box2D-2.3.0/Box2D && cmake -DBOX2D_BUILD_SHARED=OF -DBOX2D_BUILD_EXAMPLES=OFF -DBOX2D_BUILD_STATIC=ON -DBOX2D_INSTALL=OFF -DBOX2D_INSTALL_DOC=OFF && make",
+    "make": "npm run make:swig && npm run make:Box2D",
+    "wrap": "cd Box2D-2.3.0/Box2D &&  ../../swig-3.0.7/swig -c++ -javascript -node -O -ignoremissing -includeall -DV8_VERSION=0x04510335 ../../Box2D.i",
+    "clean:Box2D": "rm -rf Box2D-2.3.0 && rm -rf Box2D-2.3.0.tar.gz",
+    "clean:swig": "rm -rf swig-3.0.7 && rm -rf swig-3.0.7.tar.gz",
+    "clean": "npm run clean:Box2D && npm run clean:swig && rm -rf Box2D_wrap.cxx",
+    "preinstall": "npm run clean && npm run get && npm run untar && npm run patch && npm run make && npm run wrap",
+    "install": "node-gyp configure && node-gyp build",
+    "postinstall": "npm run clean"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "babel": "^5.8.29",
+    "bindings": "^1.2.1"
+  }
+}
