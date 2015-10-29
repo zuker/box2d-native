@@ -2,6 +2,10 @@
   "name": "box2d-native",
   "version": "0.0.3",
   "description": "Box2D as native addon",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/zuker/box2d-native"
+  },
   "main": "index.js",
   "engines" : {
     "node" : ">=4.2.1"
