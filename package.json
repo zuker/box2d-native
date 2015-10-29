@@ -1,14 +1,14 @@
 {
   "name": "box2d-native",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Box2D as native addon",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/zuker/box2d-native"
+    "type": "git",
+    "url": "https://github.com/zuker/box2d-native"
   },
   "main": "index.js",
-  "engines" : {
-    "node" : ">=4.2.1"
+  "engines": {
+    "node": ">=4.2.1"
   },
   "config": {
     "box2d_url": "https://codeload.github.com/erincatto/Box2D/tar.gz/v2.3.0",
