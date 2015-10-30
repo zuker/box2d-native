@@ -6,18 +6,18 @@
     "type": "git",
     "url": "https://github.com/zuker/box2d-native"
   },
-  "main": "index.js",
+  "main": "Box2D.js",
   "engines": {
     "node": ">=4.2.1"
   },
   "config": {
-    "box2d_url": "https://codeload.github.com/erincatto/Box2D/tar.gz/v2.3.0",
+    "box2d_url": "https://codeload.github.com/erincatto/Box2D/tar.gz/v2.3.1",
     "swig_url": "http://prdownloads.sourceforge.net/swig/swig-3.0.7.tar.gz",
-    "box2d_arch_name": "Box2D-2.3.0.tar.gz",
+    "box2d_arch_name": "Box2D-2.3.1.tar.gz",
     "swig_arch_name": "swig-3.0.7.tar.gz",
     "swig_dir": "swig-3.0.7",
-    "box2d_dir": "Box2D-2.3.0/Box2D",
-    "box2d_cmake_lists_path": "Box2D-2.3.0/Box2D/Box2D/CMakeLists.txt"
+    "box2d_dir": "Box2D-2.3.1/Box2D",
+    "box2d_cmake_lists_path": "Box2D-2.3.1/Box2D/Box2D/CMakeLists.txt"
   },
   "scripts": {
     "get:Box2D": "curl -O -J $npm_package_config_box2d_url",
@@ -31,13 +31,14 @@
     "make:Box2D": "cd $npm_package_config_box2d_dir && cmake -DBOX2D_BUILD_SHARED=OFF -DBOX2D_BUILD_EXAMPLES=OFF -DBOX2D_BUILD_STATIC=ON -DBOX2D_INSTALL=OFF -DBOX2D_INSTALL_DOC=OFF && make",
     "make": "npm run make:swig && npm run make:Box2D",
     "wrap": "cd $npm_package_config_box2d_dir &&  ../../$npm_package_config_swig_dir/swig -c++ -javascript -node -O -ignoremissing -includeall -DV8_VERSION=`node -e \"console.log('0x0' + process.versions.v8.replace(/\\./g, ''))\"` ../../Box2D.i",
-    "clean:Box2D": "rm -rf Box2D-2.3.0 && rm -rf $npm_package_config_box2d_arch_name",
+    "clean:Box2D": "rm -rf Box2D-2.3.1 && rm -rf $npm_package_config_box2d_arch_name",
     "clean:swig": "rm -rf $npm_package_config_swig_dir && rm -rf $npm_package_config_swig_arch_name",
     "clean": "npm run clean:Box2D && npm run clean:swig && rm -rf Box2D_wrap.cxx",
     "preinstall": "npm run clean && npm run get && npm run untar && npm run patch && npm run make && npm run wrap",
     "install": "node-gyp configure && node-gyp build",
-    "postinstall": "npm run clean",
-    "test": "node node_modules/.bin/mocha -r tests/bootstrap.js tests/**/*.spec.js"
+    "postinstall": "npm run clean && node node_modules/.bin/babel Box2D.es6 --out-file Box2D.js --source-maps --whitelist strict,es6.modules,es6.parameters,es6.spread,es6.destructuring",
+    "test": "node node_modules/.bin/mocha -r tests/bootstrap.js tests/**/*.spec.js",
+    "demo": "node node_modules/.bin/electron demo/"
   },
   "contributors": [
     "Leonid Kuzmin <lndkuzmin@gmail.com> (https://github.com/zuker)"
@@ -49,6 +50,7 @@
     "lodash": "^3.10.1"
   },
   "devDependencies": {
+    "electron-prebuilt": "^0.34.2",
     "mocha": "^2.3.3",
     "should": "^7.1.1"
   }

@@ -124,4 +124,5 @@ install_manifest.txt
 /Box2D-2.3.0.tar.gz
 /Box2D-2.3.0
 /Box2D_wrap.cxx
-
+/Box2D.js
+/Box2D.js.map

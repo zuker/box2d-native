@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>box2d-native-demo</title>
+</head>
+<body>
+<script>
+    (function () {
+        'use strict';
+        let demo = require('remote').require('./demo');
+
+        let drawScale = 2, alpha = 1, fillAlpha = 1, xformScale = 1, drawFlags = 0;
+        let width = 640;
+        let height = 480;
+        let canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        document.body.appendChild(canvas);
+        let ctx = canvas.getContext('2d');
+        ctx.translate(0, height);
+        ctx.scale(1, -1);
+
+        function _color(color, alpha) {
+            return 'rgba(' + ((color & 0xFF0000) >> 16) + ',' + ((color & 0xFF00) >> 8) + ',' + (color & 0xFF) + ',' + alpha + ')';
+        }
+
+
+        function DrawCircle (center, radius, color, solid, axis) {
+            if (!radius) return;
+            let cx = center.x * drawScale
+                    , cy = center.y * drawScale;
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.beginPath();
+            ctx.strokeStyle = _color(color.color, alpha);
+            if (solid) {
+                ctx.fillStyle = _color(color.color, fillAlpha);
+            }
+            ctx.arc(cx, cy, radius * drawScale, 0, Math.PI * 2, true);
+            ctx.moveTo(cx, cy);
+            ctx.lineTo((center.x + axis.x * radius) * drawScale, (center.y + axis.y * radius) * drawScale);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+        }
+
+        let debugDraw = {
+            SetFlags: function (flags) {
+                drawFlags = flags;
+            },
+            GetFlags: function () {
+                return drawFlags;
+            },
+            AppendFlags: function (flags) {
+                drawFlags |= flags;
+            },
+            ClearFlags: function (flags) {
+                drawFlags &= ~flags;
+            },
+            DrawPolygon: function (vertices, vertexCount, color, solid) {
+                if (!vertexCount) return;
+                ctx.beginPath();
+                ctx.strokeStyle = _color(color.color, alpha);
+                if (solid) {
+                    ctx.fillStyle = _color(color.color, fillAlpha);
+                }
+                ctx.moveTo(vertices[0].x * drawScale, vertices[0].y * drawScale);
+                for (let i = 1; i < vertexCount; i++) {
+                    ctx.lineTo(vertices[i].x * drawScale, vertices[i].y * drawScale);
+                }
+                ctx.lineTo(vertices[0].x * drawScale, vertices[0].y * drawScale);
+                ctx.closePath();
+                if (solid) {
+                    ctx.fill();
+                }
+                ctx.stroke();
+            },
+            DrawSolidPolygon: function (vertices, vertexCount, color) {
+                this.DrawPolygon(vertices, vertexCount, color, true);
+            },
+            DrawCircle: DrawCircle,
+            DrawSolidCircle: function (center, radius, axis, color) {
+                DrawCircle(center, radius, color, true, axis);
+            },
+            DrawSegment: function (p1, p2, color) {
+                ctx.strokeStyle = _color(color.color, alpha);
+
+                ctx.beginPath();
+                ctx.moveTo(p1.x * drawScale, p1.y * drawScale);
+                ctx.lineTo(p2.x * drawScale, p2.y * drawScale);
+                ctx.closePath();
+                ctx.stroke();
+            },
+            DrawTransform: function (xf) {
+                ctx.beginPath();
+                ctx.strokeStyle = _color(0xff0000, alpha);
+                ctx.moveTo(xf.position.x * drawScale, xf.position.y * drawScale);
+                ctx.lineTo(
+                        (xf.position.x + xformScale * xf.R.col1.x) * drawScale,
+                        (xf.position.y + xformScale * xf.R.col1.y) * drawScale)
+                ;
+
+                ctx.strokeStyle = _color(0xff00, alpha);
+                ctx.moveTo(xf.position.x * drawScale, xf.position.y * drawScale);
+                ctx.lineTo(
+                        (xf.position.x + xformScale * xf.R.col2.x) * drawScale,
+                        (xf.position.y + xformScale * xf.R.col2.y) * drawScale
+                );
+                ctx.closePath();
+                ctx.stroke();
+            }
+        };
+        let lastTimestamp = 0;
+        demo.init(debugDraw);
+        (function loop() {
+            let fps = 60;
+            let now = Date.now();
+            let diff = now - lastTimestamp;
+            if (diff > (1000.0/fps)) {
+                ctx.clearRect(0, 0, 854, 400);
+                lastTimestamp = now;
+                demo.step();
+            }
+            window.requestAnimationFrame(loop);
+        })();
+    })();
+</script>
+</body>
+</html>
