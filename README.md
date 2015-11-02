@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/zuker/box2d-native.svg?branch=dev)](https://travis-ci.org/zuker/box2d-native)
+[![Build Status](https://travis-ci.org/zuker/box2d-native.svg)](https://travis-ci.org/zuker/box2d-native)
 
 # box2d-native
 [Box2D](http://box2d.org/) v2.3.1 as native Node.js addon.
