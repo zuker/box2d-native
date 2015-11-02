@@ -9,7 +9,7 @@ Box2D compiled as static library, Node.js C++ addon produced by [swig](http://ww
 
 ## Install
 
-Requires `curl`, `make`, `cmake`, `gcc`. See also requirements for [swig](http://www.swig.org/) and [node-gyp](https://www.npmjs.com/package/node-gyp)
+Requires `curl`, `make`, `cmake`, `g++`. See also requirements for [swig](http://www.swig.org/) and [node-gyp](https://www.npmjs.com/package/node-gyp)
 
 Install with [NPM](https://www.npmjs.com/):
 
