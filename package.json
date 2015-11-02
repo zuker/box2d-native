@@ -30,7 +30,7 @@
     "patch": "patch $npm_package_config_box2d_cmake_lists_path patch.txt",
     "make:Box2D": "cd $npm_package_config_box2d_dir && cmake -DBOX2D_BUILD_SHARED=OFF -DBOX2D_BUILD_EXAMPLES=OFF -DBOX2D_BUILD_STATIC=ON -DBOX2D_INSTALL=OFF -DBOX2D_INSTALL_DOC=OFF && make",
     "make": "npm run make:swig && npm run make:Box2D",
-    "wrap": "cd $npm_package_config_box2d_dir &&  ../../$npm_package_config_swig_dir/swig -c++ -javascript -node -O -ignoremissing -includeall -DV8_VERSION=`node -e \"console.log('0x0' + process.versions.v8.replace(/\\./g, ''))\"` ../../Box2D.i",
+    "wrap": "cd $npm_package_config_box2d_dir && SWIG_LIB=../../$npm_package_config_swig_dir/Lib ../../$npm_package_config_swig_dir/swig -c++ -javascript -node -O -ignoremissing -includeall -DV8_VERSION=`node -e \"console.log('0x0' + process.versions.v8.replace(/\\./g, ''))\"` ../../Box2D.i",
     "clean:Box2D": "rm -rf Box2D-2.3.1 && rm -rf $npm_package_config_box2d_arch_name",
     "clean:swig": "rm -rf $npm_package_config_swig_dir && rm -rf $npm_package_config_swig_arch_name",
     "clean": "npm run clean:Box2D && npm run clean:swig && rm -rf Box2D_wrap.cxx",
