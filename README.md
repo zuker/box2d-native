@@ -53,7 +53,6 @@ Results from [bench2d](https://github.com/joelgwebber/bench2d) (i7 2.9GHZ, 4GB R
 
 ## TODO
 
- - Box2D methods with abstract class return type returns to JS instances of that abstract class (i.e. `b2Shape` instead of `b2EdgeShape`), as a result only properties declared in abstract class are accessible.
  - Improve demo (implement all stuff from C++ Box2D testbed).
  - Refactor build, use more convenient tool.
  - Provide more benchmark results to compare with.
