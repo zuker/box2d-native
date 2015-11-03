@@ -1,5 +1,5 @@
 'use strict';
-let Box2D = require('../');
+let Box2D = require('box2d-native');
 let World = Box2D.World;
 let Vec2 = Box2D.Vec2;
 let b2Vec2 = Box2D.b2Vec2;
@@ -9,10 +9,7 @@ let b2Mul = Box2D.b2Mul;
 let b2Assert = Box2D.b2Assert;
 let b2_maxPolygonVertices = Box2D.b2_maxPolygonVertices;
 let b2Color = Box2D.b2Color;
-let _clientDebugDraw;
 let world = new World(new Vec2(0, -9.8));
-let _ = require('../node_modules/lodash');
-let util = require('util');
 let step;
 
 var bd_ground = new Box2D.b2BodyDef();
@@ -32,23 +29,14 @@ let fixture = ground.CreateFixture(shape, 0.0);
 let circleFixture = circle.CreateFixture(circleShape, 0.0);
 circleFixture.SetRestitution(0.5);
 
-fixture._shape = shape;
-circleFixture._shape = circleShape;
-
-ground._fixtures = [fixture];
-circle._fixtures = [circleFixture];
-
-world._bodies = [ground, circle];
 function DrawShape(fixture, xf, color, g_debugDraw) {
-
+  let shape = fixture.GetShape();
   switch (fixture.GetType())
   {
     case b2Shape.e_circle:
     {
-      let circle = fixture._shape;
-
-      let center = b2Mul(xf, circle.m_p);
-      let radius = circle.m_radius;
+      let center = b2Mul(xf, shape.m_p);
+      let radius = shape.m_radius;
       let axis = b2Mul(xf.q, new b2Vec2(1.0, 0.0));
         g_debugDraw.DrawSolidCircle(center, radius, axis, color);
     }
@@ -56,18 +44,16 @@ function DrawShape(fixture, xf, color, g_debugDraw) {
 
     case b2Shape.e_edge:
     {
-      let edge = fixture._shape;
-      let v1 = b2Mul(xf, edge.m_vertex1);
-      let v2 = b2Mul(xf, edge.m_vertex2);
+      let v1 = b2Mul(xf, shape.m_vertex1);
+      let v2 = b2Mul(xf, shape.m_vertex2);
         g_debugDraw.DrawSegment(v1, v2, color);
     }
       break;
 
     case b2Shape.e_chain:
     {
-      let chain = fixture.GetShape();
-      let count = chain.m_count;
-      const vertices = chain.m_vertices;
+      let count = shape.m_count;
+      const vertices = shape.m_vertices;
 
       let v1 = b2Mul(xf, vertices[0]);
       for (let i = 1; i < count; ++i)
@@ -82,14 +68,13 @@ function DrawShape(fixture, xf, color, g_debugDraw) {
 
     case b2Shape.e_polygon:
     {
-      let poly = fixture.GetShape();
-      let vertexCount = poly.m_count;
+      let vertexCount = shape.m_count;
       b2Assert(vertexCount <= b2_maxPolygonVertices);
       let vertices = new Array(b2_maxPolygonVertices);
 
       for (let i = 0; i < vertexCount; ++i)
       {
-        vertices[i] = b2Mul(xf, poly.m_vertices[i]);
+        vertices[i] = b2Mul(xf, shape.m_vertices[i]);
       }
 
         g_debugDraw.DrawSolidPolygon(vertices, vertexCount, color);
@@ -109,9 +94,9 @@ world.DrawDebugData = function () {
   let flags = this._debugDraw.GetFlags();
 
   if (flags & Box2D.b2Draw.e_shapeBit) {
-    for (let b, j = 0; b = this._bodies[j]; j++) {
+    for (let b = this.GetBodyList(); b; b = b.GetNext()) {
       let xf = b.GetTransform();
-      for (let i = 0, f; f = b._fixtures[i]; i++) {
+      for (let f = b.GetFixtureList(); f; f = f.GetNext()) {
         if (b.IsActive() == false)
         {
           DrawShape(f, xf, b2Color(0.5, 0.5, 0.3), this._debugDraw);

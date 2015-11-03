@@ -18,7 +18,7 @@ npm install node-gyp -g
 npm install box2d-native
 ```
 
-**IMPORTANT:** Installation tested only in Ubuntu 15.04 with Node.js v4.2.1.
+**IMPORTANT:** Installation tested only on Linux with Node.js >= 4.2.1.
 
 ## Usage
 
@@ -35,8 +35,12 @@ Original "namespaced" Box2D classes (`b2Vec2`, `b2World`...) are also exposed.
 
 ## Demo
 
+**IMPORTANT:** Runs only with Node.js v4.2.1
+
 ```
-npm run demo
+cd demo
+npm install
+npm start
 ```
 
 

@@ -37,8 +37,7 @@
     "preinstall": "npm run clean && npm run get && npm run untar && npm run patch && npm run make && npm run wrap",
     "install": "node-gyp configure && node-gyp build",
     "postinstall": "npm run clean && node node_modules/.bin/babel Box2D.es6 --out-file Box2D.js --source-maps --whitelist strict,es6.modules,es6.parameters,es6.spread,es6.destructuring",
-    "test": "node node_modules/.bin/mocha -r tests/bootstrap.js tests/**/*.spec.js",
-    "demo": "node node_modules/.bin/electron demo/"
+    "test": "node node_modules/.bin/mocha -r tests/bootstrap.js tests/**/*.spec.js"
   },
   "contributors": [
     "Leonid Kuzmin <lndkuzmin@gmail.com> (https://github.com/zuker)"
@@ -50,7 +49,6 @@
     "lodash": "^3.10.1"
   },
   "devDependencies": {
-    "electron-prebuilt": "^0.34.2",
     "mocha": "^2.3.3",
     "should": "^7.1.1"
   }
