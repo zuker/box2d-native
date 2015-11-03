@@ -1,6 +1,6 @@
 {
   "name": "box2d-native",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Box2D as native addon",
   "repository": {
     "type": "git",
