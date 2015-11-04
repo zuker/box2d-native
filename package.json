@@ -36,7 +36,8 @@
     "clean": "npm run clean:Box2D && npm run clean:swig && rm -rf Box2D_wrap.cxx",
     "preinstall": "npm run clean && npm run get && npm run untar && npm run patch && npm run make && npm run wrap",
     "install": "node-gyp configure && node-gyp build",
-    "postinstall": "npm run clean && node node_modules/.bin/babel Box2D.es6 --out-file Box2D.js --source-maps --whitelist strict,es6.modules,es6.parameters,es6.spread,es6.destructuring",
+    "prepublish": "node node_modules/.bin/babel Box2D.es6 --out-file Box2D.js --source-maps --whitelist strict,es6.modules,es6.parameters,es6.spread,es6.destructuring",
+    "postinstall": "npm run clean",
     "test": "node node_modules/.bin/mocha -r tests/bootstrap.js tests/**/*.spec.js"
   },
   "contributors": [

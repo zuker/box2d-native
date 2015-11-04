@@ -9,7 +9,7 @@ Box2D compiled as static library, Node.js C++ addon produced by [swig](http://ww
 
 ## Install
 
-Requires `curl`, `make`, `cmake`, `g++`. See also requirements for [swig](http://www.swig.org/) and [node-gyp](https://www.npmjs.com/package/node-gyp)
+Requires `curl`, `make`, `cmake`, `g++`. See also requirements for building [swig](http://www.swig.org/) and [node-gyp](https://www.npmjs.com/package/node-gyp)
 
 Install with [NPM](https://www.npmjs.com/):
 
@@ -18,7 +18,7 @@ npm install node-gyp -g
 npm install box2d-native
 ```
 
-**IMPORTANT:** Installation tested only on Linux with Node.js >= 4.2.1.
+**IMPORTANT:** Installation tested only on Linux with Node.js >= 4.2.1 and gc++ 4.9.
 
 ## Usage
 
@@ -38,7 +38,8 @@ Original "namespaced" Box2D classes (`b2Vec2`, `b2World`...) are also exposed.
 **IMPORTANT:** Runs only with Node.js v4.2.1
 
 ```
-cd demo
+git checkout https://github.com/zuker/box2d-native.git
+cd box2d-native/demo
 npm install
 npm start
 ```
