@@ -38,6 +38,7 @@ Original "namespaced" Box2D classes (`b2Vec2`, `b2World`...) are also exposed.
 **IMPORTANT:** Runs only with Node.js v4.2.1
 
 ```
+npm install node-gyp -g
 git checkout https://github.com/zuker/box2d-native.git
 cd box2d-native/demo
 npm install
