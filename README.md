@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/zuker/box2d-native.svg?branch=master)](https://travis-ci.org/zuker/box2d-native)
 
 # box2d-native
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/zuker/box2d-native.svg)](https://greenkeeper.io/)
 [Box2D](http://box2d.org/) v2.3.1 as native Node.js addon.
 
 ## Details
